@@ -1,0 +1,73 @@
+@startuml
+class CurrencyCode <<(T,lightgrey) unsigned byte>> {
+    <i>ISO 4217 currency code.</i>
+    --Examples--
+    0 - Not Applicable
+    36 - Australian Dollar
+    124 - Canadian Dollar
+    840 - US Dollar
+    978 - Euro
+}
+
+class PowerOfTenMultiplierType <<(T,lightgrey) signed byte>> {
+    <i>Indicates that values should be multiplied by 10ˣ.</i>
+    --Example Prefixes--
+    −6 - micro
+    −3 - milli
+    0 - None
+    1 - deca
+    2 - hecto
+    3 - kilo
+    6 - mega
+    9 - Giga
+}
+
+class ServiceKind <<(T,lightgrey) unsigned byte>> {
+    <i>Type of service measured.</i>
+    --Examples--
+    0 - electricity
+    1 - gas
+    2 - water
+    4 - pressure
+    5 - heat
+    6 - cold
+    7 - communication
+    8 - time
+}
+
+class UomType <<(T,lightgrey) unsigned byte>> {
+    <i>Unit of Measurement</i>
+    --Examples--
+    0 - Not Applicable
+    5 - A (Current)
+    29 - Voltage
+    31 - J (Energy joule)
+    33 - Hz (Frequency)
+    38 - Real power (Watts)
+    42 - m³ (Cubic Meter)
+    61 - VA (Apparent power)
+    63 - VAr (Reactive power)
+    65 - Cos? (Power factor)
+    67 - V² (Volts squared)
+    69 - A² (Amp squared)
+    71 - VAh (Apparent energy)
+    72 - Real energy (Watt-hours)
+    73 - VArh (Reactive energy)
+    106 - Ah (Ampere-hours / Available Charge)
+    119 - ft³ (Cubic Feet)
+    122 - ft³/h (Cubic Feet per Hour)
+    125 - m³/h (Cubic Meter per Hour)
+    128 - US gl (US Gallons)
+    129 - US gl/h (US Gallons per Hour)
+    130 - IMP gl (Imperial Gallons)
+    131 - IMP gl/h (Imperial Gallons per Hour)
+    132 - BTU
+    133 - BTU/h
+    134 - Liter
+    137 - L/h (Liters per Hour)
+    140 - PA(gauge)
+    155 - PA(absolute)
+    169 - Therm
+}
+
+@enduml

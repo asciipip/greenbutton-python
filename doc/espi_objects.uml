@@ -1,0 +1,50 @@
+@startuml
+hide empty methods
+
+class UsagePoint <<(E,orange)>> {
+    id : IRI <i>Internationalized Resource Identifier</i>
+    title : String
+    serviceCategory : ServiceCategory
+}
+UsagePoint *-- ServiceCategory
+UsagePoint o-- MeterReading
+
+class ServiceCategory {
+    kind : ServiceKind
+}
+
+class MeterReading <<(E,orange)>> {
+    id : IRI <i>Internationalized Resource Identifier</i>
+}
+MeterReading o-- ReadingType
+MeterReading o-- IntervalBlock
+
+class ReadingType <<(E,orange)>> {
+    id : IRI <i>Internationalized Resource Identifier</i>
+    currency : CurrencyCode
+    powerOfTenMultiplier : PowerOfTenMultiplierType
+    uom : UomType
+}
+
+class IntervalBlock <<(E,orange)>> {
+    id : IRI <i>Internationalized Resource Identifier</i>
+    interval : DateTimeInterval
+    intervalBlocks : IntervalBlock[]
+}
+IntervalBlock *-- DateTimeInterval
+IntervalBlock *-- IntervalReading
+
+class DateTimeInterval {
+    duration : UInt32
+    start : TimeType
+}
+
+class IntervalReading {
+    cost : UInt48
+    timePeriod : DateTimeInterval
+    value : UInt48
+}
+note left: "cost" units are 1/100,000 of MeterReading currency units.
+DateTimeInterval --* IntervalReading
+
+@enduml
