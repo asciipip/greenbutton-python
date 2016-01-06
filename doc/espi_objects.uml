@@ -1,50 +1,75 @@
 @startuml
+hide empty members
 hide empty methods
 
+note as AtomPropNote
+All Atom entries also have the following properties,
+derived from the Atom schema (rather than the ESPI one):
+  id : Internationalized Resource Identifier
+  title : String
+  published : DateTime
+  updated : DateTime
+end note
+
 class UsagePoint <<(E,orange)>> {
-    id : IRI <i>Internationalized Resource Identifier</i>
-    title : String
-    serviceCategory : ServiceCategory
+    roleFlags : HexBinary16
+    status : UInt8
+    ServiceCategory
 }
 UsagePoint *-- ServiceCategory
-UsagePoint o-- MeterReading
+UsagePoint o-- "0..*" MeterReading
 
 class ServiceCategory {
     kind : ServiceKind
 }
+note top: All parameters required.
 
-class MeterReading <<(E,orange)>> {
-    id : IRI <i>Internationalized Resource Identifier</i>
-}
-MeterReading o-- ReadingType
-MeterReading o-- IntervalBlock
+class MeterReading <<(E,orange)>>
+MeterReading o-- "1" ReadingType
+MeterReading o-- "0..*" IntervalBlock
 
 class ReadingType <<(E,orange)>> {
-    id : IRI <i>Internationalized Resource Identifier</i>
+    accumulationBehaviour : AccumulationBehaviourType
+    commodity : CommodityType
+    consumptionTier : ConsumptionTierType
     currency : CurrencyCode
+    dataQualifier : DataQualifierType
+    defaultQuality : QualityOfReading
+    flowDirection : FlowDirectionType
+    intervalLength : UInt32
+    kind : KindType
+    phase : PhaseCode
     powerOfTenMultiplier : PowerOfTenMultiplierType
+    timeAttribute : TimeAttributeType
+    tou : TOUType
     uom : UomType
 }
 
 class IntervalBlock <<(E,orange)>> {
-    id : IRI <i>Internationalized Resource Identifier</i>
     interval : DateTimeInterval
-    intervalBlocks : IntervalBlock[]
+    IntervalReading
 }
-IntervalBlock *-- DateTimeInterval
-IntervalBlock *-- IntervalReading
+IntervalBlock ... DateTimeInterval
+IntervalBlock *-- "0..*" IntervalReading
 
 class DateTimeInterval {
     duration : UInt32
     start : TimeType
 }
+note left: All parameters required.
 
 class IntervalReading {
     cost : UInt48
     timePeriod : DateTimeInterval
     value : UInt48
+    ReadingQuality
 }
-note left: "cost" units are 1/100,000 of MeterReading currency units.
-DateTimeInterval --* IntervalReading
+DateTimeInterval ... IntervalReading
+IntervalReading *-- "0..*" ReadingQuality
+
+class ReadingQuality {
+    quality : QualityOfReading
+}
+note left: All parameters required.
 
 @enduml

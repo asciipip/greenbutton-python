@@ -16,17 +16,32 @@ Basically, there are a number of entity types than can be thought of as
 "top-level" types.  Each instance of one of these is present in an `entry`
 entity in the Atom feed, with the ESPI's entity being contained within the
 Atom entry's `content` entity.  The Atom entry's `link` entities are used
-to relate the top-level entities to each other.  The only relation type
-the author has seen is "related", which means that the meaning of the
-relation must be inferred from the relative types of the related entities.
-Some ESPI feeds appear to have `title` entities in their Atom entries.
-These can be used as friendly names for the ESPI entities being
-represented.
+to relate the top-level entities to each other.  Some ESPI feeds appear to
+have `title` entities in their Atom entries.  These can be used as
+friendly names for the ESPI entities being represented.
 
 As an example, the `MeterReading` entity will be related to one
-`ReadingType` entity and one or more `IntervalBlock` entities, indicating
+`ReadingType` entity and zero or more `IntervalBlock` entities, indicating
 that readings within the `IntervalBlock`s all share the parameters defined
 in the `ReadingType` entity.
+
+In some feeds the entries link directly to each other, so the `UsagePoint`
+entry might reference a `MeterReading` directly.  In other feeds, there is
+an intermediate URL between them, so the `UsagePoint` might have a "self"
+URL of ".../UsagePoint/1" and a "related" URL of
+"../UsagePoint/1/MeterReading" while a `MeterReading` will have a "self"
+URL of ".../UsagePoint/1/MeterReading/1" and an "up" URL of
+".../UsagePoint/1/MeterReading".  No entity would have a "self" URL of
+".../UsagePoint/1/MeterReading".  This appears to be how many-to-one
+relationships are represented while only having a single "related" link
+for each type of relation.
+
+It is believed that the link URLs are intended to be opaque, so a parser
+probably shouldn't rely on any particular structure therein.  All
+relationship building should be done simply on the basis of string
+equality comparisons between the URLs.  That said, we can probably infer
+certain supplementary identification (account IDs, etc.) by inspecting the
+URLs after the object structure has been derived.
 
 There are a number of other, secondary entity types, which fall into more
 or less one of two categories.  One category basically serves as
@@ -37,13 +52,14 @@ natural gas service, and so on.  The other category includes types that
 serve to encapsulate groups of values, like the `DateTimeInterval` type,
 which represents a period of time by giving its start time and duration.
 
-Pretty much every child of every element is optional, so one ESPI feed
-might look very different from another one.
+Pretty much every child of every element is optional, so individual ESPI
+feeds might look very different from each other.
 
 The `*.uml` files in this directory give [PlantUML][] diagrams of some of
 the relationships between the various types.
 
   [PlantUML]: http://plantuml.com/
+
 
 Top-Level Types
 ===============
@@ -56,7 +72,7 @@ will be an electric or gas meter.
 
 ### Links
 
-One or more `MeterReading` entries.
+Zero or more `MeterReading` entries.
 
 ### Children
 
@@ -76,7 +92,7 @@ and other parameters, as defined by the associated `ReadingType` entry.
 
 Exactly one `ReadingType` entry.
 
-One or more `IntervalBlock` entries.
+Zero or more `IntervalBlock` entries.
 
 ### Children
 
@@ -189,8 +205,7 @@ factor for the reading.  If `powerOfTenMultiplier` is "6", then every
  * `ReadingQuality` (encapsulation type `ReadingQuality`, may have an
    unlimited number of these entities) - An indication of how good or
    accurate this reading should be considered to be.  May occur more than
-   once, probably for entities that represent more than one real-world
-   reading.
+   once, if more than one value applies.
  * `timePeriod` (encapsulation type `DateTimeInterval`) - The time period
    over which the `value` of this reading was consumed.  See note above
    about cases when this isn't present.
@@ -252,7 +267,7 @@ The units in which a service is measured.
  * 5 - A (Amps, Current)
  * 29 - V (Volts, Voltage)
  * 31 - J (Joules, Energy)
- * 33 - Hz (Frequency)
+ * 33 - Hz (Hertz, Frequency)
  * 38 - W (Watts, Real Power)
  * 42 - m³ (Cubic Meters, Volume)
  * 61 - VA (Volt-Amps, Apparent Power)

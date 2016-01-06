@@ -1,73 +1,211 @@
 @startuml
+class AccumulationBehaviourType <<(T,lightgrey) unsigned byte>> {
+    0 - Not Applicable
+    1 - Bulk Quantity
+    3 - Cumulative
+    4 - Delta Data
+    6 - Indicating
+    9 - Summation
+    12 - Instantaneous
+    --
+}
+
+class CommodityType <<(T,lightgrey) unsigned byte>> {
+    0 - Not Applicable
+    1 - Electricity
+    4 - Air
+    7 - Natural Gas
+    8 - Propane
+    9 - Potable Water
+    10 - Steam
+    11 - Wastewater
+    12 - Heating Fluid
+    13 - Cooling Fluid
+    --
+}
+
+class ConsumptionTierType <<(T,lightgrey) unsigned byte>> {
+    0 - Not Applicable
+    1 - Block Tier 1
+    2 - Block Tier 2
+    3 - Block Tier 3
+    4 - Block Tier 4
+    5 - Block Tier 5
+    6 - Block Tier 6
+    7 - Block Tier 7
+    8 - Block Tier 8
+    9 - Block Tier 9
+    10 - Block Tier 10
+    11 - Block Tier 11
+    12 - Block Tier 12
+    13 - Block Tier 13
+    14 - Block Tier 14
+    15 - Block Tier 15
+    16 - Block Tier 16
+    --
+}
+
 class CurrencyCode <<(T,lightgrey) unsigned byte>> {
-    <i>ISO 4217 currency code.</i>
-    --Examples--
     0 - Not Applicable
     36 - Australian Dollar
     124 - Canadian Dollar
     840 - US Dollar
     978 - Euro
+    --
 }
 
-class PowerOfTenMultiplierType <<(T,lightgrey) signed byte>> {
-    <i>Indicates that values should be multiplied by 10ˣ.</i>
-    --Example Prefixes--
-    −6 - micro
-    −3 - milli
-    0 - None
-    1 - deca
-    2 - hecto
-    3 - kilo
-    6 - mega
-    9 - Giga
+class DataQualifierType <<(T,lightgrey) unsigned byte>> {
+    0 - Not Applicable
+    2 - Average
+    8 - Maximum
+    9 - Minimum
+    12 - Normal
+    --
+}
+
+class FlowDirectionType <<(T,lightgrey) unsigned byte>> {
+    0 - Not Applicable
+    1 - Forward
+    19 - Reverse
+    --
+}
+
+class KindType <<(T,lightgrey) unsigned byte>> {
+    0 - Not Applicable
+    3 - Currency
+    4 - Current
+    5 - Current Angle
+    7 - Date
+    8 - Demand
+    12 - Energy
+    15 - Frequency
+    37 - Power
+    38 - Power Factor
+    40 - Quantity Power
+    54 - Voltage
+    55 - Voltage Angle
+    64 - Distortion Power Factor
+    155 - Volumetric Flow
+    --
+}
+
+class PhaseCode <<(T,lightgrey) unsigned short>> {
+    0 - Not Applicable
+    32 - Phase C (or CN?)
+    40 - Phase CA
+    64 - Phase B (or BN?)
+    66 - Phase BC
+    128 - Phase A
+    129 - Phase AN
+    132 - Phase AB
+    224 - Phase ABC
+    256 - Phase S2
+    257 - Phase S2N
+    512 - Phase S1
+    513 - Phase S1N
+    768 - Phase S1S2
+    769 - Phase S1S2N
+    --
+}
+
+class QualityOfReading <<(T,lightgrey) unsigned byte>> {
+    0 - valid
+    7 - manually edited
+    8 - estimated using reference day
+    9 - estimated using linear interpolation
+    10 - questionable
+    11 - derived
+    12 - projected (forecast)
+    13 - mixed
+    14 - raw
+    15 - normalized for weather
+    16 - other
+    17 - validated
+    18 - verified
+    --
 }
 
 class ServiceKind <<(T,lightgrey) unsigned byte>> {
-    <i>Type of service measured.</i>
-    --Examples--
-    0 - electricity
-    1 - gas
-    2 - water
-    4 - pressure
-    5 - heat
-    6 - cold
-    7 - communication
-    8 - time
+    0 - Electricity
+    1 - Natural Gas
+    2 - Water
+    4 - Pressure
+    5 - Heat
+    6 - Cold
+    7 - Communication
+    8 - Time
+    --
+}
+
+class TimeAttributeType <<(T,lightgrey) unsigned byte>> {
+    0 - Not Applicable
+    1 - 10 Minutes
+    2 - 15 Minutes
+    4 - 24 Hours
+    5 - 30 Minutes
+    7 - 60 Minutes
+    11 - Daily
+    13 - Monthly
+    15 - Present
+    16 - Previous
+    24 - Weekly
+    32 - For the Specified Period
+    79 - Daily 30 Minute Fixed Block
+    --
+}
+
+class TOUType <<(T,lightgrey) unsigned byte>> {
+    0 - Not Applicable
+    1 - TOU A
+    2 - TOU B
+    3 - TOU C
+    4 - TOU D
+    5 - TOU E
+    6 - TOU F
+    7 - TOU G
+    8 - TOU H
+    9 - TOU I
+    10 - TOU J
+    11 - TOU K
+    12 - TOU L
+    13 - TOU M
+    14 - TOU N
+    15 - TOU O
+    --
 }
 
 class UomType <<(T,lightgrey) unsigned byte>> {
-    <i>Unit of Measurement</i>
-    --Examples--
     0 - Not Applicable
-    5 - A (Current)
-    29 - Voltage
-    31 - J (Energy joule)
-    33 - Hz (Frequency)
-    38 - Real power (Watts)
-    42 - m³ (Cubic Meter)
-    61 - VA (Apparent power)
-    63 - VAr (Reactive power)
-    65 - Cos? (Power factor)
-    67 - V² (Volts squared)
-    69 - A² (Amp squared)
-    71 - VAh (Apparent energy)
-    72 - Real energy (Watt-hours)
-    73 - VArh (Reactive energy)
-    106 - Ah (Ampere-hours / Available Charge)
-    119 - ft³ (Cubic Feet)
-    122 - ft³/h (Cubic Feet per Hour)
-    125 - m³/h (Cubic Meter per Hour)
-    128 - US gl (US Gallons)
-    129 - US gl/h (US Gallons per Hour)
-    130 - IMP gl (Imperial Gallons)
-    131 - IMP gl/h (Imperial Gallons per Hour)
-    132 - BTU
-    133 - BTU/h
-    134 - Liter
-    137 - L/h (Liters per Hour)
-    140 - PA(gauge)
-    155 - PA(absolute)
-    169 - Therm
+    5 - A (Amps, Current)
+    29 - V (Volts, Voltage)
+    31 - J (Joules, Energy)
+    33 - Hz (Hertz, Frequency)
+    38 - W (Watts, Real Power)
+    42 - m³ (Cubic Meters, Volume)
+    61 - VA (Volt-Amps, Apparent Power)
+    63 - VAr (Volt-Amps Reactive, Reactive Power)
+    65 - Cos (Cosine, Power Factor)
+    67 - V² (Volts Squared)
+    69 - A² (Amps Squared)
+    71 - VAh (Volt-Amp Hours, Apparent Energy)
+    72 - Wh (Watt-Hours, Real Energy)
+    73 - VArh (Volt-Amp Reactive Hours, Reactive Energy)
+    106 - Ah (Amp-Hours, Available Charge)
+    119 - ft³ (Cubic Feet, Volume)
+    122 - ft³/h (Cubic Feet per Hour, Flow)
+    125 - m³/h (Cubic Meters per Hour, Flow)
+    128 - US gal (US Gallons, Volume)
+    129 - US gal/h (US Gallons per Hour, Flow)
+    130 - IMP gal (Imperial Gallons, Volume)
+    131 - IMP gal/h (Imperial Gallons per Hour, Flow)
+    132 - BTU (British Thermal Units, Energy)
+    133 - BTU/h (British Thermal Units per Hour, Power)
+    134 - L (Liters, Volume)
+    137 - L/h (Liters per Hour, Flow)
+    140 - Pag (Gauge Pascals, Pressure)
+    155 - Pa (Absolute Pascals, Pressure)
+    169 - thm (Therms, Energy)
+    --
 }
 
 @enduml
