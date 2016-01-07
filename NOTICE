@@ -1,0 +1,44 @@
+Much of the structure of the ESPI XML format was derived from the schema
+definition in the OpenESPI Project's OpenESPI-Common-java codebase.  That
+definition contains the following NOTICE:
+
+______________________________________________________
+NOTICE
+______________________________________________________
+
+This product is a derivative work based on the 
+        NAESB REQ.21 Energy Service Provider Interface Standard  
+        Version 1.0
+        Copyright 2011 NAESB
+
+The NAESB schema may be purchased from NAESB at:
+
+  http://www.naesb.org/misc/naesb_matl_order_espi_standards.pdf
+
+All NAESB Standards are protected under United States Copyright laws. The
+same copyright protection applies to much of the other materials published
+by NAESB. The penalties for copyright infringement may be found here.
+
+Derivative work products of NAESB standards as defined by the United
+States Copyright Act 17 U.S.C. § 101 and are permissible given that the
+work product is significantly different – substantial and material. Work
+products based upon NAESB standards or schemas included in NAESB standards
+are not considered derivative if they simply include additional software
+libraries or are considered an enhanced version of the original. In order
+for a work product to be considered significantly different there should
+be substantial and material modifications to the source coding. To ensure
+that a work is understood to be derivative and not in violation of the
+NAESB copyright policy, an entity should discuss its use with NAESB.
+
+The NAESB Copyright Policy may be found here:
+
+  http://www.naesb.org/pdf2/copyright.pdf.
+
+The NAESB Intellectual Property Rights Policy Concerning Contributions and
+Comments may be found here:
+
+  http://www.naesb.org/pdf4/naesb_ipr_policy.doc
+
+______________________________________________________
+END NOTICE
+______________________________________________________
