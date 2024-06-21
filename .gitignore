@@ -1,2 +1,17 @@
-*.pyc
+# Documentation
 doc/*.png
+
+# Python
+*.pyc
+__pycache__/
+
+# Environments
+venv/
+
+# PyCharm
+.idea/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
