@@ -4,14 +4,15 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "greenbutton_objects"
-version = "2024.6.21"
+version = "2024.6.25"
 description = "Parse Green Button XML files into Python objects."
 readme = "README.md"
-authors = [{ name = "Adam Finkle", email = "77808710+AdamFinkle@users.noreply.github.com" },
+authors = [{ name = "Phil Gold", email = "phil_g@pobox.com" },
+           { name = "Adam Finkle", email = "77808710+AdamFinkle@users.noreply.github.com" },
            { name = "Ethan Strominger", email = "ethanstrominger2@gmail.com" }]
 license = { file = "LICENSE" }
 classifiers = [
-    "License :: OSI Approved :: Apache 2.0",
+    "License :: OSI Approved :: Apache Software License (v2)",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
 ]
