@@ -15,6 +15,8 @@ standard, mostly figured out from public sources and actual ESPI files.
 Forked from the original repository [greenbutton-objects](https://github.com/asciipip/greenbutton-python)
 and packaged to be published on PyPI.
 
+Used by the Code for Boston [Home Energy Analysis Tool](https://github.com/codeforboston/home-energy-analysis-tool).
+
 
 ## Development
 Simple steps for development setup:

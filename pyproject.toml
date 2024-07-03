@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "greenbutton_objects"
-version = "2024.6.25"
+version = "2024.7.3"
 description = "Parse Green Button XML files into Python objects."
 readme = "README.md"
 authors = [{ name = "Phil Gold", email = "phil_g@pobox.com" },
